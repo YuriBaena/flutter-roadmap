@@ -96,6 +96,7 @@ class Jogo{
         print('');
         print('Preto : ');
         for(Peca p in capturadas_pelo_preto) stdout.write(p.show());
+        print('');
     }
 
 }
