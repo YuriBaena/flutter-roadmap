@@ -23,9 +23,9 @@ class Jogo{
     }
 
     void mostrarMovimentos(int x, int y){
-        if(xadrez.corPeca(x,y) != vez || !xadrez.temPeca(x,y)) return;
+        if(!xadrez.temPeca(x,y)) return;
         Posicao escolhida = xadrez.checarPosicao(x, y);
-        xadrez.mostrarTabuleiro(escolhida.verMovimentos(xadrez), Cor.branca == vez);
+        xadrez.mostrarTabuleiro(escolhida.verMovimentos(xadrez), xadrez.corPeca(x,y) != vez);
     }
 
     void mostrarTabuleiro(){
@@ -35,7 +35,7 @@ class Jogo{
     bool executarMovimento(String posicao_inicial, String posicao_final){
         var (xi, yi) = traduzir(posicao_inicial);
         var (xf, yf) = traduzir(posicao_final);
-        if(xadrez.corPeca(xi,yi) != vez || !xadrez.temPeca(xi,yi)) return false;
+        if(xadrez.corPeca(xi,yi) != vez || !xadrez.temPeca(xi,yi) || xi == 8 || yi == 8 || xf == 8 || yf == 8) return false;
         Peca? alvo = xadrez.atualizarPosicao(xi,yi,xf,yf);
         if(alvo != null) _adicionarPecaCapturada(alvo);
         _atualizarVez();
@@ -72,7 +72,7 @@ class Jogo{
             case '6': return 2;
             case '7': return 1;
             case '8': return 0;
-            default: return 0;
+            default: return 8;
         }
     }
 
@@ -86,7 +86,7 @@ class Jogo{
             case 'f': return 5;
             case 'g': return 6;
             case 'h': return 7;
-            default: return 0;
+            default: return 8;
         }
     }
 

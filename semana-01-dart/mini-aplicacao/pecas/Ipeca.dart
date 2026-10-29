@@ -41,5 +41,11 @@ abstract class Peca{
     (int, int) get posicao => (this._x, this._y);
     int get x => this._x;
     int get y => this._y;
+    set x(int fx){
+        _x = fx;
+    }
+    set y(int fy){
+        _y = fy;
+    }
     Cor get cor => this.cor_peca;
 }

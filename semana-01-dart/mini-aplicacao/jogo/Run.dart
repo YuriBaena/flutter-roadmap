@@ -72,7 +72,10 @@ class Run{
         String lin = '12345678';
         String col = 'abcdefgh';
         if(col.contains(p1[0]) && col.contains(p2[0]) && lin.contains(p1[1]) && lin.contains(p2[1])){
-            partida.executarMovimento(p1, p2);
+            if(!partida.executarMovimento(p1, p2)){
+                print('[ERRO] - Não tem peça na posição ou não existe ou a peça não é sua.');
+                _mostrarFomatado();
+            }
         }
     }
 
