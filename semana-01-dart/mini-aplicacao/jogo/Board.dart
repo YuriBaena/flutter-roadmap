@@ -8,7 +8,7 @@ class Posicao {
   Posicao(this._peca) : _ocupada = _peca != null;
 
   Posicao.vazia() : _peca = null, _ocupada = false;
-
+  
   String? mostrarPeca() {
     return _peca?.show();
   }
@@ -103,41 +103,53 @@ class Board {
     return tabuleiro[x][y];
   }
 
-  void atualizarPosicao(int px, int py, int fx, int fy){
-    if(px >= 8 || px < 0 || py >= 8 || py < 0) return;
-    if(fx >= 8 || fx < 0 || fy >= 8 || fy < 0) return;
+  Peca? atualizarPosicao(int px, int py, int fx, int fy){
+    if(px >= 8 || px < 0 || py >= 8 || py < 0) return null;
+    if(fx >= 8 || fx < 0 || fy >= 8 || fy < 0) return null;
     Peca? peca_a_mover = tabuleiro[px][py].peca;
-    if(peca_a_mover == null) return;
+    Peca? antiga = tabuleiro[fx][fy].peca;
+    if(peca_a_mover == null) return null;
     tabuleiro[px][py].removerPeca();
     peca_a_mover.mover(fx, fy);
     tabuleiro[fx][fy].adicionarPeca(peca_a_mover);
+    return antiga;
   }
 
   void mostrarTabuleiro(List<Movimento> moves, bool ataque) {
-    List<List<String>> toString = [];
+    final casas = List.generate(
+      8,
+      (linha) => List.generate(
+        8,
+        (coluna) => tabuleiro[linha][coluna].mostrarPeca() ?? ' . ',
+      ),
+    );
+
+    for (final movimento in moves) {
+      final linha = movimento.x;
+      final coluna = movimento.y;
+      final casa = casas[linha][coluna];
+
+      if (!temPeca(linha, coluna)) {
+        casas[linha][coluna] = '\x1B[33m x \x1B[0m';
+      } else {
+        final cor = ataque ? '32' : '31';
+        casas[linha][coluna] = '\x1B[${cor}m$casa\x1B[0m';
+      }
+    }
+
     for (int i = 0; i < 8; i++) {
-      toString.add([]);
+      stdout.write('${8 - i}  ');
       for (int j = 0; j < 8; j++) {
-        if (temPeca(i, j)) {
-          toString[i].add(tabuleiro[i][j].mostrarPeca() ?? ' . ');
-        } else {
-          toString[i].add(' . ');
-        }
-      }
-    }
-    for(var Movimento(x: x, y: y) in moves){
-      if(!temPeca(x,y)) toString[x][y] = ' x ';
-      else{
-        if(!ataque) toString[x][y] = '\x1B[31m' + toString[x][y] + '\x1B[0m';
-        else toString[x][y] = '\x1B[32m' + toString[x][y] + '\x1B[0m';
-      }
-    }
-    for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 8; j++){
-        stdout.write(toString[i][j]);
+        stdout.write(casas[i][j]);
       }
       stdout.write('\n');
     }
+
+    stdout.write('   ');
+    for (int coluna = 0; coluna < 8; coluna++) {
+      stdout.write(' ${String.fromCharCode(97 + coluna)} ');
+    }
+    stdout.write('\n');
   }
 }
 
