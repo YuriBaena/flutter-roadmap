@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Dados protegidos
+/semana-03-restAPI-&-arq/mobile_backend/.env

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/AuthService.dart';
 import '../widgets/TextInput.dart';
 import 'registerPage.dart';
+import 'homePage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -41,10 +42,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => Scaffold(
-            appBar: AppBar(title: const Text('Home')),
-            body: const Center(child: Text('Bem-vindo!')),
-          ),
+          builder: (context) => const HomePage(),
         ),
       );
     } catch (e) {
@@ -74,10 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                       Expanded(
                         child: Center(
                           child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                              maxWidth: 400,
-                              maxHeight: 600,
-                            ),
+                            constraints: const BoxConstraints(maxWidth: 400),
                             child: _buildBanner(context),
                           ),
                         ),
@@ -104,10 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 32),
                       ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          maxWidth: 400,
-                          maxHeight: 300,
-                        ),
+                        constraints: const BoxConstraints(maxWidth: 400),
                         child: _buildBanner(context),
                       ),
                     ],
@@ -220,31 +212,66 @@ class _LoginPageState extends State<LoginPage> {
 
   // Banner decorativo
   Widget _buildBanner(BuildContext context) {
-    return Container(
+    return SizedBox(
+      height: MediaQuery.sizeOf(context).height * 0.55,
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: const Stack(
-        children: [
-          Positioned(
-            top: 25,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Icon(Icons.bar_chart, size: 120, color: Colors.white),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 135,
+              child: Stack(
+                children: [
+                  const Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Icon(Icons.bar_chart, size: 112, color: Colors.white),
+                    ),
+                  ),
+                  const Positioned(
+                    top: 30,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Icon(Icons.trending_up, size: 80, color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            top: 60,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Icon(Icons.trending_up, size: 90, color: Colors.black),
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                children: [
+                  Text(
+                    'Seu dinheiro, no caminho certo',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Acompanhe seus resultados e tome decisões financeiras com mais confiança.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                        ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

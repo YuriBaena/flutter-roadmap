@@ -8,6 +8,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mobile
       SPRING_DATASOURCE_USERNAME: mobile
       SPRING_DATASOURCE_PASSWORD: mobile
+    env_file:
+      - ./mobile_backend/.env
     depends_on:
       db:
         condition: service_healthy

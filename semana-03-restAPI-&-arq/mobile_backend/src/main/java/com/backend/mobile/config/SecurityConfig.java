@@ -28,21 +28,8 @@ public class SecurityConfig {
             
             // Configura as regras de autorização das rotas
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll() // Rotas livres
+                .requestMatchers("/auth/**", "/api-externa/**").permitAll() // Rotas livres
                 .anyRequest().authenticated() // Qualquer outra rota exige estar logado
-            )
-            
-            // Configura o formulário de login padrão do Spring (ou você pode apontar para uma página customizada)
-            .formLogin(form -> form
-                .loginPage("/login") // Opcional: página de login personalizada
-                .defaultSuccessUrl("/home", true)
-                .permitAll()
-            )
-            
-            // Configuração de Logout
-            .logout(logout -> logout
-                .logoutSuccessUrl("/login?logout")
-                .permitAll()
             );
 
         return http.build();

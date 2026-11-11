@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Aplicação flutter',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color(0xFFC8FF00),
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           primary: Color(0xFFC8FF00),
           onPrimary: Colors.black,
         ),
-        scaffoldBackgroundColor: Color(0xFF101010),
+        scaffoldBackgroundColor: Colors.black,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFFC8FF00),
