@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-
 import '../models/Asset.dart';
+import 'ApiClient.dart';
 
 class AssetService {
+  final ApiClient _client = ApiClient.instance;
   static final Uri _endpoint = Uri.parse(
     'http://localhost:8080/api-externa/dados',
   );
 
   Future<List<Asset>> buscarAtivos() async {
-    final response = await http
+    final response = await _client
         .get(_endpoint)
         .timeout(const Duration(seconds: 15));
 

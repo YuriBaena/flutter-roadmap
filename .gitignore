@@ -1,0 +1,22 @@
+# Local secrets and environment overrides
+.env*
+!.env.example
+
+# Generated build output and caches
+**/build/
+**/target/
+**/.dart_tool/
+**/.pub-cache/
+**/coverage/
+
+# Machine-specific configuration
+**/local.properties
+
+# IDE and operating system files
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+Thumbs.db
+*.swp

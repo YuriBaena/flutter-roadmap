@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import tools.jackson.databind.JsonNode;
+
 import com.backend.mobile.client.BrapiClient;
 import com.backend.mobile.DTOs.StockResponseDTO;
 
@@ -29,6 +31,16 @@ public class TestApiExterna {
         @PathVariable("codigo") int codigo
     ){
         return ResponseEntity.ok(this.api.getInfo(codigo));
+    }
+
+    @GetMapping("/tickers")
+    public ResponseEntity<JsonNode> searchTickers(
+        @RequestParam("search") String search
+    ) {
+        if (search.isBlank()) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(this.api.getTickers(search));
     }
 
 }

@@ -12,6 +12,21 @@ docker compose up --build
 
 O frontend web ficará disponível em <http://localhost:3000>.
 
+Após o login, o JWT é armazenado com `flutter_secure_storage` e enviado
+automaticamente no cabeçalho `Authorization: Bearer <token>` das requisições
+HTTP. A opção **Deslogar** remove o token armazenado.
+
+## Carteira de tickers
+
+Na tela inicial, busque um ticker da B3, informe seu preço médio e adicione-o à
+carteira. A busca e as cotações passam pelo backend, que consulta a API da
+brapi; use o botão de atualização para buscar os preços novamente. O resultado
+é mostrado em reais e em percentual por ação ou cota, pois a carteira não
+solicita a quantidade de cada ativo. Tickers e preços médios são gravados no
+PostgreSQL e associados ao usuário autenticado; cada usuário só lista ou remove
+as próprias posições. O backend expõe `GET` e `POST /api/carteira` e
+`DELETE /api/carteira/{id}` para essa carteira.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import tools.jackson.databind.JsonNode;
+
 import com.backend.mobile.DTOs.StockResponseDTO;
 import com.backend.mobile.enums.Tickers;
 
@@ -48,6 +50,27 @@ public class BrapiClient {
                 .map(Tickers::getCodigo)
                 .map(this::getInfo)
                 .toList();
+    }
+
+    public JsonNode getTickers(String search) {
+        String normalizedSearch = search == null ? "" : search.trim();
+        if (normalizedSearch.isEmpty()) {
+            throw new IllegalArgumentException("O termo de busca não pode ser vazio.");
+        }
+
+        JsonNode response = this.restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                    .path("/v2/tickers")
+                    .queryParam("search", normalizedSearch)
+                    .queryParam("limit", 10)
+                    .build())
+                .retrieve()
+                .body(JsonNode.class);
+
+        if (response == null) {
+            throw new IllegalStateException("A brapi retornou uma resposta vazia.");
+        }
+        return response;
     }
 
     public record BrapiResponseDto(
