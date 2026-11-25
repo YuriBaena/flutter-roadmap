@@ -8,11 +8,11 @@ Este repositório documenta minha trilha prática de estudos e evolução em **F
 
 | Semana | Foco | Entrega Principal | Status |
 | :---: | :--- | :--- | :---: |
-| **01** | Dart | Exercícios + Mini aplicação (Console) | 🟡 Em andamento |
-| **02** | Fundamentos do Flutter | Aplicativo com múltiplas telas | ⚪ Não iniciado |
-| **03** | Estado e Arquitetura | CRUD estruturado (Clean Architecture) | ⚪ Não iniciado |
-| **04** | Integração com API REST | Aplicativo integrado ao backend | ⚪ Não iniciado |
-| **05** | Testes e Qualidade | Aplicação testada e refatorada | ⚪ Não iniciado |
+| **01** | Dart | Exercícios + Mini aplicação (Console) | ✅ Concluido |
+| **02** | Fundamentos do Flutter | Aplicativo com múltiplas telas | ✅ Concluido |
+| **03** | Estado e Arquitetura | CRUD estruturado (Clean Architecture) | ✅ Concluido |
+| **04** | Integração com API REST | Aplicativo integrado ao backend | ✅ Concluido |
+| **05** | Testes e Qualidade | Aplicação testada e refatorada | 🟡 Em Andamento |
 | **06** | Projeto Real | Demanda real + Pull Request | ⚪ Não iniciado |
 
 ---
